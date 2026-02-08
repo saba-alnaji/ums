@@ -11,6 +11,7 @@ const displayUsers = async () => {
           <td> <img src="${user.imageUrl}" width=""100px/></td>
           <td>
             <button class="btn btn-outline-danger" onclick=deleteUser(${user.id})>Delete</button>
+            <a href='./detalis.html?userId=${user.id}' class='btn btn-outline-info'>Detalis</a>
           
           </td>
 
