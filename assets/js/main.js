@@ -3,9 +3,10 @@ const getUsers = async () => {
     return response.data;
 }
 const displayUsers = async () => {
-    const result = await getUsers();
-    const users = result.users.map((user) => {
-        return `
+    try {
+        const result = await getUsers();
+        const users = result.users.map((user) => {
+            return `
         <tr>
           <td>${user.name}</td> 
           <td> <img src="${user.imageUrl}" width=""100px/></td>
@@ -17,12 +18,21 @@ const displayUsers = async () => {
 
         </tr>
         `
-    }).join(" ")
-    console.log(users);
-    document.querySelector(".users .users-data").innerHTML = users;
-} 
+        }).join(" ")
+        console.log(users);
+        document.querySelector(".users .users-data").innerHTML = users;
+    } catch (error) {
+        document.querySelector(".errorClass").classList.remove('d-none');
+
+    } finally {
+        document.querySelector(".loader").classList.add('d-none');
+
+    }
+
+
+}
 displayUsers();
-const deleteUser =async(id)=>{
+const deleteUser = async (id) => {
     const response = await axios.delete(`https://ums12.runasp.net/api/users/ ${id}`);
     console.log(response);
 }
